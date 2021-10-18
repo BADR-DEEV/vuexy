@@ -1,10 +1,11 @@
 import axios from 'axios'
 import qs from 'qs'
 import { paginateArray } from '../../../../../utility/Utils'
+import users from '../reducer'
 // ** Get all Data
 export const getAllData = () => {
   return async dispatch => {
-    await axios.get('http://api.tfrheeda.devs.ly/users').then(response => {
+    await axios.get('https://api.tfrheeda.devs.ly/users').then(response => {
       dispatch({
         type: 'GET_ALL_DATA',
         data: response.data
@@ -16,7 +17,7 @@ export const getAllData = () => {
 // // ** Get data on page or row change
 export const getData =  params => {
 return async dispatch => {
-const res = await axios.get('http://api.tfrheeda.devs.ly/users')
+const res = await axios.get('https://api.tfrheeda.devs.ly/users')
 
 const { q, perPage, page, role } = params
 
@@ -56,7 +57,7 @@ const { q, perPage, page, role } = params
 export const getUser = id => {
   return async dispatch => {
     await axios
-      .get(`http://api.tfrheeda.devs.ly/users/${id}`)
+      .get(`https://api.tfrheeda.devs.ly/users/${id}`)
       .then(response => {
         dispatch({
           type: 'GET_USER',
@@ -78,7 +79,7 @@ export const getUser = id => {
      }
   }
      axios
-       .post('http://api.tfrheeda.devs.ly/users', data, config)
+       .post('https://api.tfrheeda.devs.ly/users', data, config)
       .then(response => {
         dispatch({
           type: 'ADD_USER',
@@ -93,11 +94,43 @@ export const getUser = id => {
   }
 }
 
+
+
+
+// ** Edit user 
+export const updateUserProfile = user => {
+  return async (dispatch, getState) => {
+    const testData = qs.stringify(user)
+    console.log(user)
+   
+    const config = {
+      headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        }
+     }
+     axios
+     .put(`https://api.tfrheeda.devs.ly/users/${user.id}`, testData, config)
+    .then(response => {
+      dispatch({
+        type: 'EDIT_USER',
+        payload : testData
+      })
+    })
+    .then(() => {
+     console.log("wokring ?")
+    console.log(user)
+     
+    })
+    .catch(err => console.log(err))
+
+}
+}
+
 // // ** Delete user
 export const deleteUser = id => {
   return (dispatch, getState) => {
     axios
-      .delete('http://api.tfrheeda.devs.ly/users/', { id })
+      .delete(`https://api.tfrheeda.devs.ly/users/${id}`)
       .then(response => {
         dispatch({
           type: 'DELETE_USER'

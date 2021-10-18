@@ -12,7 +12,7 @@ const UserInfoCard = ({ selectedUser }) => {
   // ** render user img
   const renderUserImg = () => {
     if (selectedUser !== null && selectedUser.image !== null) {
-      return <img src={selectedUser.avatar} alt='user-avatar' className='img-fluid rounded' height='104' width='104' />
+      return <img src={selectedUser.avatar} alt='not-Found' className='img-fluid rounded' height='104' width='104' />
     } else {
       const stateNum = Math.floor(Math.random() * 6),
         states = ['light-success', 'light-danger', 'light-warning', 'light-info', 'light-primary', 'light-secondary'],
@@ -116,10 +116,10 @@ const UserInfoCard = ({ selectedUser }) => {
                     Role
                   </CardText>
                 </div>
-                <CardText className='text-capitalize mb-0'>
+                {/* <CardText className='text-capitalize mb-0'>
                   {console.log(selectedUser)}
                   {selectedUser !== null ? selectedUser.role.name : 'Admin'}
-                </CardText>
+                </CardText> */}
               </div>
               {/* <div className='d-flex flex-wrap align-items-center my-50'>
                 <div className='user-info-title'>

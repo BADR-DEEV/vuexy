@@ -39,7 +39,7 @@
             username: values.username,
             password: values.password,
             // country: values.country,
-            // phone: values.phone,
+            phone: values.phone,
             email: values.email
             // currentPlan: plan,
             // status: 'active',
@@ -134,18 +134,18 @@
               className={classnames({ 'is-invalid': errors['country'] })}
             />
           </FormGroup> */}
-          {/* <FormGroup>
+          <FormGroup>
             <Label for='phone'>
               Contact <span className='text-danger'>*</span>
             </Label>
             <Input
               name='phone'
               id='phone'
-              placeholder='(397) 294-5153'
+              placeholder='(092) 294-5153'
               innerRef={register({ required: false })}
               className={classnames({ 'is-invalid': errors['phone'] })}
             />
-          </FormGroup> */}
+          </FormGroup>
           <FormGroup>
             <Label for='user-role'>User Role</Label>
             <Input type='select' id='user-role' name='user-role' value={role} onChange={e => setRole(e.target.value)}>

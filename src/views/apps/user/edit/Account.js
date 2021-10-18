@@ -7,11 +7,35 @@ import Avatar from '@components/avatar'
 // // ** Third Party Components
 import { Lock, Edit, Trash2 } from 'react-feather'
 import { Media, Row, Col, Button, Form, Input, Label, FormGroup, Table, CustomInput } from 'reactstrap'
-
+import {updateUserProfile} from "../../user/store/action/index"
+import {useDispatch} from "react-redux"
 const UserAccountTab = ({ selectedUser }) => {
+
+   const dispatch = useDispatch()
 //   // ** States
   const [img, setImg] = useState(null)
   const [userData, setUserData] = useState(null)
+  
+ const [auth, setAuth] = useState({
+  username:"",
+  email : "",
+  password: "",
+  role : 3,
+  phone : "123456"
+})
+
+const { username, email, password, role, phone} = auth
+const onChange = e => {
+  setAuth({ ...auth, [e.target.name]: e.target.value })
+}
+const submitHandler = (e) => {
+  e.preventDefault()
+   dispatch(updateUserProfile({id : selectedUser.id, username, email, password, role, phone}))
+   console.log(username)
+   console.log(email)
+  
+}
+
 
 //   // ** Function to change user image
 //   const onChange = e => {
@@ -27,11 +51,11 @@ const UserAccountTab = ({ selectedUser }) => {
   useEffect(() => {
     if (selectedUser !== null || (selectedUser !== null && userData !== null && selectedUser.id !== userData.id)) {
       setUserData(selectedUser)
-    //   if (selectedUser.image !== null) {
-    //     return setImg(selectedUser.avatar)
-    //   } else {
-    //     return setImg(null)
-    //   }
+      if (selectedUser.image !== null) {
+        return setImg(selectedUser.avatar)
+      } else {
+        return setImg(null)
+      }
     }
   }, [selectedUser, userData])
 
@@ -46,7 +70,7 @@ const UserAccountTab = ({ selectedUser }) => {
           initials
           color={color}
           className='rounded mr-2 my-25'
-          content={selectedUser.fullName}
+          content={selectedUser.username}
           contentStyles={{
             borderRadius: 0,
             fontSize: 'calc(36px)',
@@ -64,7 +88,7 @@ const UserAccountTab = ({ selectedUser }) => {
         <img
           className='user-avatar rounded mr-2 my-25 cursor-pointer'
           src={img}
-          alt='user profile avatar'
+          alt='Profile Not Found'
           height='90'
           width='90'
         />
@@ -97,16 +121,16 @@ const UserAccountTab = ({ selectedUser }) => {
                   </span>
                 </Button.Ripple>
               </div> */}
-            </Media>
+            </Media> 
           </Media>
         </Col>
         <Col sm='12'>
-          <Form onSubmit={e => e.preventDefault()}>
+          <Form onSubmit= {submitHandler}>
             <Row>
               <Col md='4' sm='12'>
                 <FormGroup>
                   <Label for='username'>Username</Label>
-                  <Input type='text' id='username' placeholder='Username' defaultValue={userData.username} />
+                  <Input name = "username" type='text' id='username' placeholder='Username' value = {username} onChange = {onChange} />
                 </FormGroup>
               </Col>
               {/* <Col md='4' sm='12'>
@@ -118,7 +142,14 @@ const UserAccountTab = ({ selectedUser }) => {
               <Col md='4' sm='12'>
                 <FormGroup>
                   <Label for='email'>Email</Label>
-                  <Input type='text' id='email' placeholder='Email' defaultValue={userData.email} />
+                  <Input type = "email" name = "email" type='text' id='email' placeholder='Email' onChange = {onChange} value = {email} />
+                </FormGroup>
+              </Col>
+
+              <Col md='4' sm='12'>
+                <FormGroup>
+                  <Label for='password'>password</Label>
+                  <Input name = "password" type='text' id='password' placeholder='password' onChange = {onChange} value = {password} />
                 </FormGroup>
               </Col>
               {/* <Col md='4' sm='12'>
@@ -131,18 +162,7 @@ const UserAccountTab = ({ selectedUser }) => {
                   </Input>
                 </FormGroup>
               </Col> */}
-              <Col md='4' sm='12'>
-                <FormGroup>
-                  <Label for='role'>Role</Label>
-                  <Input type='select' name='role' id='role' defaultValue={userData.role}>
-                    <option value={2}>Public</option>
-                    <option value={1}>Authenticated</option>
-                    <option value={3}>Xadmin</option>
-                    {/* <option value='maintainer'>Maintainer</option>
-                    <option value='subscriber'>Subscriber</option> */}
-                  </Input>
-                </FormGroup>
-              </Col>
+
               {/* <Col md='4' sm='12'>
                 <FormGroup>
                   <Label for='company'>Company</Label>

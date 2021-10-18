@@ -86,7 +86,7 @@ const UsersList = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentRole, setCurrentRole] = useState({ value: '', label: 'Select Role' })
-  const [currentPlan, setCurrentPlan] = useState({ value: '', label: 'Select Plan' })
+  // const [currentPlan, setCurrentPlan] = useState({ value: '', label: 'Select Plan' })
   const [currentStatus, setCurrentStatus] = useState({ value: '', label: 'Select Status', number: 0 })
 
   // ** Function to toggle sidebar
@@ -100,7 +100,7 @@ const UsersList = () => {
          page: currentPage,
         perPage: rowsPerPage,
         role: currentRole.value,
-        currentPlan: currentPlan.value,
+        // currentPlan: currentPlan.value,
          status: currentStatus.value,
         q: searchTerm
        })
@@ -112,18 +112,16 @@ const UsersList = () => {
     { value: '', label: 'Select Role' },
     { value: 'Authenticated', label: 'Authenticated' },
     { value: 'Xadmin', label: 'Xadmin' },
-    { value: 'Public', label: 'Public' },
-    { value: 'maintainer', label: 'Maintainer' },
-    { value: 'subscriber', label: 'Subscriber' }
+    { value: 'Public', label: 'Public' }
   ]
 
-  const planOptions = [
-    { value: '', label: 'Select Plan' },
-    { value: 'basic', label: 'Basic' },
-    { value: 'company', label: 'Company' },
-    { value: 'enterprise', label: 'Enterprise' },
-    { value: 'team', label: 'Team' }
-  ]
+  // const planOptions = [
+  //   { value: '', label: 'Select Plan' },
+  //   { value: 'basic', label: 'Basic' },
+  //   { value: 'company', label: 'Company' },
+  //   { value: 'enterprise', label: 'Enterprise' },
+  //   { value: 'team', label: 'Team' }
+  // ]
 
   const statusOptions = [
     { value: '', label: 'Select Status', number: 0 },
@@ -139,7 +137,7 @@ const UsersList = () => {
          page: page.selected + 1,
          perPage: rowsPerPage,
         role: currentRole.value,
-        currentPlan: currentPlan.value,
+        // currentPlan: currentPlan.value,
          status: currentStatus.value,
          q: searchTerm
        })
@@ -155,7 +153,7 @@ const UsersList = () => {
         page: currentPage,
         perPage: value,
         role: currentRole.value,
-        currentPlan: currentPlan.value,
+        // currentPlan: currentPlan.value,
         status: currentStatus.value,
         q: searchTerm
       })
@@ -171,7 +169,7 @@ const UsersList = () => {
         page: currentPage,
         perPage: rowsPerPage,
         role: currentRole.value,
-        currentPlan: currentPlan.value,
+        // currentPlan: currentPlan.value,
         status: currentStatus.value,
         q: val
       })
@@ -205,7 +203,7 @@ const UsersList = () => {
   const dataToRender = () => {
     const filters = {
       role: currentRole.value,
-      currentPlan: currentPlan.value,
+      // currentPlan: currentPlan.value,
       status: currentStatus.value,
       q: searchTerm
     }
@@ -247,7 +245,7 @@ const UsersList = () => {
                       page: currentPage,
                       perPage: rowsPerPage,
                       role: data.value,
-                      currentPlan: currentPlan.value,
+                      // currentPlan: currentPlan.value,
                       status: currentStatus.value,
                       q: searchTerm
                     })
@@ -255,7 +253,7 @@ const UsersList = () => {
                 }}
               />
             </Col>
-            <Col className='my-md-0 my-1' md='4'>
+            {/* <Col className='my-md-0 my-1' md='4'>
               <Select
                 theme={selectThemeColors}
                 isClearable={false}
@@ -270,14 +268,14 @@ const UsersList = () => {
                       page: currentPage,
                       perPage: rowsPerPage,
                       role: currentRole.value,
-                      currentPlan: data.value,
+                      // currentPlan: data.value,
                       status: currentStatus.value,
                       q: searchTerm
                     })
                   )
                 }}
               />
-            </Col>
+            </Col> */}
             <Col md='4'>
               <Select
                 theme={selectThemeColors}
@@ -293,7 +291,7 @@ const UsersList = () => {
                       page: currentPage,
                       perPage: rowsPerPage,
                       role: currentRole.value,
-                      currentPlan: currentPlan.value,
+                      // currentPlan: currentPlan.value,
                       status: data.value,
                       q: searchTerm
                     })
